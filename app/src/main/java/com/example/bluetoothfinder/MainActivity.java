@@ -36,6 +36,19 @@ public class MainActivity extends AppCompatActivity
                 statusTextView.setText("Finished");
                 searchButton.setEnabled(true);
             }
+            // WHEN WE FIND BLUETOOTH DEVICE
+            else if(BluetoothDevice.ACTION_FOUND.equals(action))
+            {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                String name = device.getName();
+                Log.i("yy",name);
+                String address = device.getAddress();
+                // GET SIGNAL STRENGTH
+                int rsi =  intent.getShortExtra(BluetoothDevice.EXTRA_RSSI, Short.MIN_VALUE);
+                String rssi = Integer.toString(rsi);
+                Log.i("Device Found","Name : "+name+"Address : "+address+"RSSI : "+rssi);
+
+            }
 
         }
     };
